@@ -53,8 +53,8 @@ namespace OdeToFood
             }
 
             // force ssl
-            app.UseRewriter(new RewriteOptions()
-                .AddRedirectToHttpsPermanent());
+            //app.UseRewriter(new RewriteOptions()
+            //    .AddRedirectToHttpsPermanent());
 
             app.UseStaticFiles();
 
