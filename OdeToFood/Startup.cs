@@ -38,9 +38,9 @@ namespace OdeToFood
 
 
             services.AddSingleton<IGreeter, Greeter>();
-            // services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
-            // services.AddScoped<IRestaurantData, SqlRestaurantData>();
-            services.AddScoped<IRestaurantData, InMemoryRestaurantData>();
+            //services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
+            //services.AddScoped<IRestaurantData, SqlRestaurantData>();
+            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
             services.AddMvc();
         }
 
@@ -53,8 +53,8 @@ namespace OdeToFood
             }
 
             // force ssl
-            //app.UseRewriter(new RewriteOptions()
-            //    .AddRedirectToHttpsPermanent());
+            app.UseRewriter(new RewriteOptions()
+                .AddRedirectToHttpsPermanent());
 
             app.UseStaticFiles();
 
