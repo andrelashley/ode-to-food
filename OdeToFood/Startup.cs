@@ -38,9 +38,22 @@ namespace OdeToFood
 
 
             services.AddSingleton<IGreeter, Greeter>();
+
+            // sql server setup
             services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
-            services.AddScoped<IRestaurantData, SqlRestaurantData>();
+
+            // DI for interfacing with EF core
+            // services.AddScoped<IRestaurantData, SqlRestaurantData>();
+
+            // DI for interfacing with EF core (Repository pattern)
+            services.AddScoped<IOdeToFoodRepository, OdeToFoodRepository>();
+
+            // DI for interfacing with in memory data
             // services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+
+            // DI for seeder class
+            services.AddTransient<OdeToFoodSeeder>();
+
             services.AddMvc();
         }
 
@@ -63,6 +76,16 @@ namespace OdeToFood
             // app.UseAuthentication();
 
             app.UseMvc(ConfigureRoutes);
+
+            if (env.IsDevelopment())
+            {
+                // seed the database
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var seeder = scope.ServiceProvider.GetService<OdeToFoodSeeder>();
+                    seeder.Seed();
+                }
+            }
         }
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
