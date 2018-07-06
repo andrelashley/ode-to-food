@@ -54,7 +54,9 @@ namespace OdeToFood
             // DI for seeder class
             services.AddTransient<OdeToFoodSeeder>();
 
-            services.AddMvc();
+            services.AddMvc()
+                // circumvent exceptions caused by referencing loops (in parent-child relationships)
+                .AddJsonOptions(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

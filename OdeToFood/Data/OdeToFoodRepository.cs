@@ -33,6 +33,11 @@ namespace OdeToFood.Data
             }
         }
 
+        public Restaurant GetRestaurantById(int id)
+        {
+            return _ctx.Restaurants.Find(id);
+        }
+
         public bool SaveAll()
         {
             return _ctx.SaveChanges() > 0;

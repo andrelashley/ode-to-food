@@ -30,7 +30,25 @@ namespace OdeToFood.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Failed to get restaurants: {ex}");
-                return null;
+                return BadRequest("Failed to get restaurants");
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var restaurant = _repository.GetRestaurantById(id);
+
+                if (restaurant == null) NotFound();
+                return Ok(restaurant);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get restaurants: {ex}");
+                return BadRequest($"Failed to get restaurant with id: {id}");
             }
         }
     }
