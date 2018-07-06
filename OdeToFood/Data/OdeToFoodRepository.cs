@@ -18,6 +18,11 @@ namespace OdeToFood.Data
             _logger = logger;
         }
 
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
+        }
+
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
             try
