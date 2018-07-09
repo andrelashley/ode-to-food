@@ -13,6 +13,13 @@ webpackEmptyAsyncContext.id = "../../../../../ClientApp/$$_gendir lazy recursive
 
 /***/ }),
 
+/***/ "../../../../../ClientApp/app/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-9\">\r\n        <h3>{{ title }}</h3>\r\n        <restaurant-list></restaurant-list>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <div class=\"well well-sm\">\r\n            <h3>Browse</h3>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
 /***/ "../../../../../ClientApp/app/app.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -28,14 +35,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'app';
+        this.title = 'Restaurants';
     }
     return AppComponent;
 }());
 AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'app-root',
-        template: "\n    <h1>\n      Welcome to {{title}}!!\n    </h1>\n  ",
+        template: __webpack_require__("../../../../../ClientApp/app/app.component.html"),
         styles: []
     })
 ], AppComponent);
@@ -52,12 +59,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shop_restaurantList_component__ = __webpack_require__("../../../../../ClientApp/app/shop/restaurantList.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -69,7 +78,8 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_3__shop_restaurantList_component__["a" /* RestaurantList */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */]
@@ -80,6 +90,55 @@ AppModule = __decorate([
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/restaurantList.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <ul>\r\n        <li *ngFor=\"let r of restaurants\">{{ r.name }}: {{ r.rating }}</li>\r\n    </ul>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/restaurantList.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestaurantList; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var RestaurantList = (function () {
+    function RestaurantList() {
+        this.restaurants = [{
+                name: "Kukoo's",
+                rating: 5.5
+            },
+            {
+                name: "Shawarma Palace",
+                rating: 7
+            },
+            {
+                name: "5th Street Bar and Grill",
+                rating: 10
+            }];
+    }
+    return RestaurantList;
+}());
+RestaurantList = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: "restaurant-list",
+        template: __webpack_require__("../../../../../ClientApp/app/shop/restaurantList.component.html"),
+        styleUrls: []
+    })
+], RestaurantList);
+
+//# sourceMappingURL=restaurantList.component.js.map
 
 /***/ }),
 

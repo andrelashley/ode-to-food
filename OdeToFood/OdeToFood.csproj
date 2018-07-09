@@ -6,12 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\shop\restaurantList.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\shop\restaurantList.component.ts" />
   </ItemGroup>
 
   <Target Name="MyPublishScripts" BeforeTargets="BeforePublish">

@@ -7,18 +7,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'Shop';
+var RestaurantList = /** @class */ (function () {
+    function RestaurantList() {
+        this.restaurants = [{
+                name: "Kukoo's",
+                rating: 5.5
+            },
+            {
+                name: "Shawarma Palace",
+                rating: 7
+            },
+            {
+                name: "5th Street Bar and Grill",
+                rating: 10
+            }];
     }
-    AppComponent = __decorate([
+    RestaurantList = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: "./app.component.html",
-            styles: []
+            selector: "restaurant-list",
+            templateUrl: "restaurantList.component.html",
+            styleUrls: []
         })
-    ], AppComponent);
-    return AppComponent;
+    ], RestaurantList);
+    return RestaurantList;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.RestaurantList = RestaurantList;
+//# sourceMappingURL=restaurantList.component.js.map
