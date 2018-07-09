@@ -31,7 +31,7 @@ namespace OdeToFood.Controllers
         {
             try
             {
-                return Ok( _repository.GetAllRestaurants());
+                return Ok(_repository.GetAllRestaurants());
             }
             catch (Exception ex)
             {
