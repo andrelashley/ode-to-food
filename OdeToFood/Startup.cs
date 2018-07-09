@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
+using OdeToFood.Models;
 using OdeToFood.Services;
 
 namespace OdeToFood
@@ -34,6 +36,12 @@ namespace OdeToFood
             //    _configuration.Bind("AzureAd", options);
             //})
             //.AddCookie();
+
+            services.AddIdentity<AppUser, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<OdeToFoodDbContext>();
 
 
             services.AddSingleton<IGreeter, Greeter>();
@@ -74,7 +82,7 @@ namespace OdeToFood
 
             app.UseNodeModules(env.ContentRootPath);
 
-            // app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(ConfigureRoutes);
 
@@ -93,7 +101,7 @@ namespace OdeToFood
         {
             // /Home/Index/4
 
-            routeBuilder.MapRoute("Default", 
+            routeBuilder.MapRoute("Default",
                 "{controller=Home}/{action=Index}/{id?}");
         }
     }
