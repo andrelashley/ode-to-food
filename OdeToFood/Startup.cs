@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using OdeToFood.Data;
 using OdeToFood.Models;
 using OdeToFood.Services;
+using System.Text;
 
 namespace OdeToFood
 {
@@ -44,6 +46,19 @@ namespace OdeToFood
                 cfg.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<OdeToFoodDbContext>();
+
+            // support cookie auth and jwt auth
+            services.AddAuthentication()
+                .AddCookie()
+                .AddJwtBearer(cfg => 
+                {
+                    cfg.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = _configuration["Tokens:Issuer"],
+                        ValidAudience = _configuration["Tokens:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]))
+                    };
+                });
 
 
             services.AddSingleton<IGreeter, Greeter>();
