@@ -84,7 +84,7 @@ namespace OdeToFood
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var seeder = scope.ServiceProvider.GetService<OdeToFoodSeeder>();
-                    seeder.Seed();
+                    seeder.Seed().Wait();
                 }
             }
         }

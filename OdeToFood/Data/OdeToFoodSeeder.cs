@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using OdeToFood.Models;
 using System;
@@ -13,16 +14,39 @@ namespace OdeToFood.Data
     {
         private OdeToFoodDbContext _ctx;
         private IHostingEnvironment _hosting;
+        private readonly UserManager<AppUser> _userManager;
 
-        public OdeToFoodSeeder(OdeToFoodDbContext ctx, IHostingEnvironment hosting)
+        public OdeToFoodSeeder(OdeToFoodDbContext ctx,
+            IHostingEnvironment hosting,
+            UserManager<AppUser> userManager)
         {
             _ctx = ctx;
             _hosting = hosting;
+            _userManager = userManager;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
             _ctx.Database.EnsureCreated();
+
+            var user = await _userManager.FindByEmailAsync("andre.lashley@gmail.com");
+
+            if (user == null)
+            {
+                user = new AppUser()
+                {
+                    FirstName = "Andre",
+                    LastName = "Lashley",
+                    UserName = "andre.lashley@gmail.com",
+                    Email = "andre.lashley@gmail.com"
+                };
+
+                var result = await _userManager.CreateAsync(user, "P@ssw0rd!");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Failed to create default user.");
+                }
+            }
 
             if (!_ctx.Restaurants.Any())
             {
