@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
 using OdeToFood.Models;
@@ -14,15 +13,12 @@ namespace OdeToFood.Controllers
     {
         private IOdeToFoodRepository _repository;
         private ILogger<RestaurantsController> _logger;
-        private IMapper _mapper;
 
         public RestaurantsController(IOdeToFoodRepository repository,
-                ILogger<RestaurantsController> logger,
-                IMapper mapper)
+                ILogger<RestaurantsController> logger)
         {
             _repository = repository;
             _logger = logger;
-            _mapper = mapper;
 
         }
 
@@ -32,7 +28,7 @@ namespace OdeToFood.Controllers
         {
             try
             {
-                return Ok( _mapper.Map<IEnumerable<Restaurant>, ICollection<RestaurantViewModel>>( _repository.GetAllRestaurants()));
+                return Ok( _repository.GetAllRestaurants());
             }
             catch (Exception ex)
             {
@@ -49,7 +45,14 @@ namespace OdeToFood.Controllers
                 var restaurant = _repository.GetRestaurantById(id);
 
                 if (restaurant == null) return NotFound();
-                return Ok(_mapper.Map<Restaurant, RestaurantViewModel>(restaurant));
+
+                var vm = new RestaurantViewModel
+                {
+                    Id = restaurant.Id,
+                    Name = restaurant.Name,
+                    Cuisine = restaurant.Cuisine
+                };
+                return Ok(vm);
             }
             catch (Exception ex)
             {
@@ -66,12 +69,21 @@ namespace OdeToFood.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var newRestaurant = _mapper.Map<RestaurantViewModel, Restaurant>(model);
-                    
+                    var newRestaurant = new Restaurant
+                    {
+                        Name = model.Name,
+                        Cuisine = model.Cuisine
+                    };
+
                     _repository.AddEntity(newRestaurant);
+                    var vm = new RestaurantViewModel
+                    {
+                        Name = newRestaurant.Name,
+                        Cuisine = newRestaurant.Cuisine
+                    };
                     if (_repository.SaveAll())
                     {
-                        return Created($"/api/restaurants/{newRestaurant.Id}", _mapper.Map<Restaurant, RestaurantViewModel>(newRestaurant));
+                        return Created($"/api/restaurants/{newRestaurant.Id}", vm);
                     }
                 }
                 else

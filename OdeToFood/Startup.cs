@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -42,9 +40,6 @@ namespace OdeToFood
 
             // sql server setup
             services.AddDbContext<OdeToFoodDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("OdeToFood")));
-
-            // add automapper
-            services.AddAutoMapper();
 
             // DI for interfacing with EF core
             // services.AddScoped<IRestaurantData, SqlRestaurantData>();

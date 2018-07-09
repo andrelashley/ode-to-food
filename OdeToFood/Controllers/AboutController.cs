@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
 
 namespace OdeToFood.Controllers
 {
-    [Route("company/[controller]/[action]")]
+    [Authorize]
     public class AboutController
     {
-        [Route("")]
         public string Phone()
         {
             return "1-250-813-0854";

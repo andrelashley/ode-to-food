@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OdeToFood.Models;
 
 namespace OdeToFood.Data
 {
-    public class OdeToFoodDbContext : DbContext
+    public class OdeToFoodDbContext : IdentityDbContext<AppUser>
     {
 
         public OdeToFoodDbContext(DbContextOptions options)
