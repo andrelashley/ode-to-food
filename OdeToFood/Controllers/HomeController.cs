@@ -72,5 +72,11 @@ namespace OdeToFood.Controllers
             return null;
 
         }
+
+        [HttpGet]
+        public IActionResult Shop()
+        {
+            return View();
+        }
     }
 }
