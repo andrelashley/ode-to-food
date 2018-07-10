@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace OdeToFood.Controllers
 {
     [Route("api/[Controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class RestaurantsController : Controller
     {
         private IOdeToFoodRepository _repository;

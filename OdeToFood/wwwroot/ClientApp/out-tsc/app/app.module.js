@@ -8,8 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/common/http");
 var app_component_1 = require("./app.component");
 var restaurantList_component_1 = require("./shop/restaurantList.component");
+var dataService_1 = require("./shared/dataService");
+var router_1 = require("@angular/router");
+var shop_component_1 = require("./shop/shop.component");
+var routes = [
+    { path: "", component: shop_component_1.Shop }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -20,9 +27,16 @@ var AppModule = /** @class */ (function () {
                 restaurantList_component_1.RestaurantList
             ],
             imports: [
-                platform_browser_1.BrowserModule
+                platform_browser_1.BrowserModule,
+                http_1.HttpClientModule,
+                router_1.RouterModule.forRoot(routes, {
+                    useHash: true,
+                    enableTracing: false // for debugging routes
+                })
             ],
-            providers: [],
+            providers: [
+                dataService_1.DataService
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

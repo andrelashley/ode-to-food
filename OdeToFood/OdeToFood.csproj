@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\shared\dataService.ts" />
+    <None Remove="ClientApp\app\shared\restaurant.ts" />
     <None Remove="ClientApp\app\shop\restaurantList.component.ts" />
+    <None Remove="ClientApp\app\shop\shop.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\shared\dataService.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\restaurant.ts" />
     <TypeScriptCompile Include="ClientApp\app\shop\restaurantList.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shop\shop.component.ts" />
   </ItemGroup>
 
   <Target Name="MyPublishScripts" BeforeTargets="BeforePublish">

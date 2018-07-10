@@ -9,32 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
-var dataService_1 = require("../shared/dataService");
-var RestaurantList = /** @class */ (function () {
-    function RestaurantList(data) {
-        this.data = data;
+require("rxjs/add/operator/map");
+var DataService = /** @class */ (function () {
+    function DataService(http) {
+        this.http = http;
         this.restaurants = [];
-        this.restaurants = data.restaurants;
     }
-    RestaurantList.prototype.ngOnInit = function () {
+    DataService.prototype.loadRestaurants = function () {
         var _this = this;
-        this.data.loadRestaurants()
-            .subscribe(function (success) {
-            if (success) {
-                _this.restaurants = _this.data.restaurants;
-            }
+        return this.http.get("/api/restaurants")
+            .map(function (data) {
+            _this.restaurants = data;
+            return true;
         });
     };
-    RestaurantList = __decorate([
-        core_1.Component({
-            selector: "restaurant-list",
-            templateUrl: "restaurantList.component.html",
-            styleUrls: []
-        }),
-        __metadata("design:paramtypes", [dataService_1.DataService])
-    ], RestaurantList);
-    return RestaurantList;
+    DataService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.HttpClient])
+    ], DataService);
+    return DataService;
 }());
-exports.RestaurantList = RestaurantList;
-//# sourceMappingURL=restaurantList.component.js.map
+exports.DataService = DataService;
+//# sourceMappingURL=dataService.js.map
